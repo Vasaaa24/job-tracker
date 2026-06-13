@@ -431,7 +431,7 @@ function JobCard({ job, onStatus, onMove, onDel, onEdit, onAddComment, onDelComm
   }
 
   return (
-    <div className="card" style={{ borderLeftColor: st.color }}>
+    <div className="card">
       <div className="card-top">
         <div>
           <div className="card-title">{job.title}</div>
@@ -443,14 +443,12 @@ function JobCard({ job, onStatus, onMove, onDel, onEdit, onAddComment, onDelComm
       </div>
 
       {job.note && (
-        <div className="card-company" style={{ marginTop: 8, fontStyle: "italic" }}>
-          📝 {job.note}
-        </div>
+        <div className="card-note">{job.note}</div>
       )}
 
       <div className="card-meta">
-        <span className="status-badge" style={{ color: st.color, background: st.color + "22" }}>
-          <span className="sdot"></span>
+        <span className="status-badge">
+          <span className="sdot" style={{ background: st.color }}></span>
           {st.label}
         </span>
         {job.link && (
