@@ -1,24 +1,33 @@
-import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
+import postgres from "postgres";
 import type { Job } from "./statuses";
 
-let _sql: NeonQueryFunction<false, false> | null = null;
+let _sql: ReturnType<typeof postgres> | null = null;
 
-/** Líná inicializace DB klienta — neběží při buildu, jen za běhu API. */
-export function sql(strings: TemplateStringsArray, ...params: any[]) {
+/** Líná inicializace DB klienta — neběží při buildu, jen za běhu API.
+ *  Univerzální Postgres ovladač (funguje se Supabase i Neonem). */
+function client() {
   if (!_sql) {
     const connectionString =
       process.env.DATABASE_URL ||
       process.env.POSTGRES_URL ||
-      process.env.DATABASE_URL_UNPOOLED ||
+      process.env.POSTGRES_PRISMA_URL ||
       "";
     if (!connectionString) {
       throw new Error(
-        "Chybí DATABASE_URL / POSTGRES_URL — připoj databázi ve Vercelu (Storage → Neon)."
+        "Chybí DATABASE_URL — nastav ji v Environment Variables (connection string ze Supabase / Neon)."
       );
     }
-    _sql = neon(connectionString);
+    _sql = postgres(connectionString, {
+      ssl: "require",
+      prepare: false, // kompatibilní se Supabase transaction poolerem
+      max: 1, // šetrné ke spojením v serverless prostředí
+    });
   }
-  return _sql(strings, ...params);
+  return _sql;
+}
+
+export function sql(strings: TemplateStringsArray, ...params: any[]) {
+  return client()(strings, ...params);
 }
 
 let tableReady = false;
