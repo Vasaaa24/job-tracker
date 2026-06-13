@@ -198,9 +198,9 @@ export default function Page() {
           <h1>Job Tracker</h1>
         </div>
         <div className="header-actions">
-          <a className="btn-ghost" href="/api/logout" style={{ textDecoration: "none", display: "inline-block" }}>
+          <button className="btn-ghost" onClick={() => (window.location.href = "/api/logout")}>
             Odhlásit
-          </a>
+          </button>
           <button className="btn-primary" onClick={openAdd}>
             ＋ Přidat pozici
           </button>
