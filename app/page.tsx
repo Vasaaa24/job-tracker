@@ -202,7 +202,7 @@ export default function Page() {
             Odhlásit
           </button>
           <button className="btn-primary" onClick={openAdd}>
-            ＋ Přidat pozici
+            Přidat pozici
           </button>
         </div>
       </header>
@@ -311,7 +311,7 @@ export default function Page() {
                     checked={form.group === "top"}
                     onChange={() => setForm({ ...form, group: "top" })}
                   />
-                  ⭐ Top
+                  Top
                 </label>
                 <label className={form.group === "basic" ? "active-basic" : ""}>
                   <input
@@ -438,7 +438,7 @@ function JobCard({ job, onStatus, onMove, onDel, onEdit, onAddComment, onDelComm
           <div className="card-company">{job.company}</div>
         </div>
         <button className="icon-btn" onClick={() => onEdit(job)} title="Upravit">
-          ✎
+          Upravit
         </button>
       </div>
 
@@ -453,7 +453,7 @@ function JobCard({ job, onStatus, onMove, onDel, onEdit, onAddComment, onDelComm
         </span>
         {job.link && (
           <a className="card-link" href={job.link} target="_blank" rel="noopener noreferrer">
-            ↗ LinkedIn
+            LinkedIn
           </a>
         )}
         <span className="card-date">přidáno {fmtDate(job.created)}</span>
@@ -468,20 +468,20 @@ function JobCard({ job, onStatus, onMove, onDel, onEdit, onAddComment, onDelComm
           ))}
         </select>
         <button className="icon-btn" onClick={() => onMove(job.id)} title="Přesunout skupinu">
-          ⇄
+          Přesunout
         </button>
         <button className="icon-btn" onClick={() => onDel(job.id)} title="Smazat">
-          🗑
+          Smazat
         </button>
       </div>
 
       <div className="comments">
         {job.comments.map((c) => (
           <div className="comment" key={c.id}>
-            <span>💬 {c.text}</span>
+            <span>{c.text}</span>
             <span className="ctime">{fmtDate(c.ts)}</span>
             <button className="comment-del" onClick={() => onDelComment(job.id, c.id)} title="Smazat">
-              ✕
+              Smazat
             </button>
           </div>
         ))}
@@ -494,7 +494,7 @@ function JobCard({ job, onStatus, onMove, onDel, onEdit, onAddComment, onDelComm
             onKeyDown={(e) => e.key === "Enter" && submitComment()}
           />
           <button className="icon-btn" onClick={submitComment}>
-            ＋
+            Přidat
           </button>
         </div>
       </div>

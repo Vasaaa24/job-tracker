@@ -21,7 +21,7 @@ export const STATUSES = [
   { id: "replied", label: "Odpověděli", color: "#7c5cff" },
   { id: "interview", label: "Pohovor domluven", color: "#4f8cff" },
   { id: "waiting_int", label: "Čekám na odpověď po pohovoru", color: "#ff8c42" },
-  { id: "offer", label: "Nabídka 🎉", color: "#3fd68b" },
+  { id: "offer", label: "Nabídka", color: "#3fd68b" },
   { id: "rejected", label: "Zamítnuto", color: "#ff6b81" },
 ] as const;
 
